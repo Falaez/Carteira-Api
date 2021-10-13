@@ -1,6 +1,6 @@
 package br.com.alura.carteira.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 public class UsuarioFormDto {
 		
-	@NotBlank
+	@NotNull
 	private String nome;
-	@NotBlank
+	@NotNull
 	private String login;
-	@NotBlank
+	
 	private String senha;
 	
 }

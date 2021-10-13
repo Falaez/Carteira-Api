@@ -17,22 +17,21 @@ import br.com.alura.carteira.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	private ModelMapper modelMapper = new ModelMapper();
-	
-	public Page<UsuarioDto> listar(Pageable pageable){
+
+	public Page<UsuarioDto> listar(Pageable pageable) {
 		Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
 		return usuarios.map(t -> modelMapper.map(t, UsuarioDto.class));
 	}
 
 	public void cadastrar(@Valid UsuarioFormDto dto) {
-	Usuario usuario = modelMapper.map(dto, Usuario.class);
-	
-		String senha = new Random().nextInt(999999)+ "";
+		Usuario usuario = modelMapper.map(dto, Usuario.class);
+
+		String senha = new Random().nextInt(999999) + "";
 		usuario.setSenha(senha);
-	
 		usuarioRepository.save(usuario);
 	}
 }

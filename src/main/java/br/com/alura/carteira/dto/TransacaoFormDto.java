@@ -38,6 +38,7 @@ public class TransacaoFormDto {
 	private TipoTransacao tipo;
 	
 	@JsonAlias("usuario_id")//conversão de nome do front para back 
+	@NotNull
 	private Long usuarioId;
 	
 	
