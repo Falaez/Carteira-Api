@@ -3,6 +3,7 @@ package br.com.alura.carteira.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -25,9 +26,11 @@ public class TransacaoService {
 		List<Transacao> transacao = transacaoRespository.findAll();
 		return transacao.stream().map(t -> modelMapper.map(t, TransacaoDto.class)).collect(Collectors.toList());
 	}
-
+	
+	@Transactional
 	public void cadastrar(@Valid TransacaoFormDto dto) {
 	Transacao transacao= modelMapper.map(dto, Transacao.class);
+	transacao.setId(null);
 	
 	transacaoRespository.save(transacao);
 	}
