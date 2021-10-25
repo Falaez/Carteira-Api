@@ -2,6 +2,7 @@ package br.com.alura.carteira.service;
 
 import java.util.Random;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -26,7 +27,8 @@ public class UsuarioService {
 		Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
 		return usuarios.map(t -> modelMapper.map(t, UsuarioDto.class));
 	}
-
+	
+	@Transactional
 	public UsuarioDto cadastrar(@Valid UsuarioFormDto dto) {
 		Usuario usuario = modelMapper.map(dto, Usuario.class);
 
