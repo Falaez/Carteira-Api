@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,18 @@ public class TratamentoDeErros {
 	}
 	
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
 	public Error500Dto tratarErro500(Exception ex, HttpServletRequest req){
 		return new Error500Dto(
 				LocalDateTime.now(),
 				ex.getClass().toString(),
 				ex.getMessage(),
 				req.getRequestURI());
+	}
+	
+	@ExceptionHandler(EntityNotFoundException.class)
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	public void tratarErro404(){
+		
 	}
 }
