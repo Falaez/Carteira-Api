@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,7 +36,7 @@ public class TratamentoDeErros {
 				req.getRequestURI());
 	}
 	
-	@ExceptionHandler(EntityNotFoundException.class)
+	@ExceptionHandler({EntityNotFoundException.class, EmptyResultDataAccessException.class})
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	public void tratarErro404(){
 		
