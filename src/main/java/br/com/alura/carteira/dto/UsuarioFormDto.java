@@ -16,4 +16,7 @@ public class UsuarioFormDto {
 	
 	private String senha;
 	
+	@NotNull
+	private Long perfilId;
+	
 }
