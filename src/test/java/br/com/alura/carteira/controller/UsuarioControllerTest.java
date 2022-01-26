@@ -69,16 +69,21 @@ class UsuarioControllerTest {
 	
 	
 	@Test
-	void deveriaCadastrarUsuarioComDadosCompletos() throws Exception {
-		String json = "{\"nome\":\"fulano\",\"login\":\"fulano@email.com\",\"perfilId\":1}";
-		String jsonEsperado = "{\"nome\":\"fulano\",\"login\":\"fulano@email.com\"}";
-		
-		mvc.perform(post("/usuarios")
-				.contentType(MediaType.APPLICATION_JSON).content(json)
-				.header("Authorization", "Bearer " + token))
-				.andExpect(status().isCreated())
-				.andExpect(header().exists("Location"))
-				.andExpect(content().json(jsonEsperado)); 
-	}
+    void deveriaCadastrarUsuarioComDadosCompletos() throws Exception {
+        String json = "{\"nome\":\"fulano\",\"login\":\"fulano@gmail.com\",\"perfilId\":1, \"email\":\"fulano@email.com\"}";
+        String jsonEsperado = "{\"nome\":\"fulano\",\"login\":\"fulano@gmail.com\"}";
+
+        mvc
+                .perform(
+                        post("/usuarios")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json)
+                                .header("Authorization", "Bearer " + token))
+
+                .andExpect(status().isCreated())
+                .andExpect(header().exists("Location"))
+                .andExpect(content().json(jsonEsperado));
+
+    }
 
 }
