@@ -37,6 +37,9 @@ class TransacaoServiceTest {
 	@Mock
 	private ModelMapper modelMapper;
 	
+	@Mock
+	private CalculadoraDeImpostoService calculadoraDeImpostoService;
+	
 	@InjectMocks
 	private TransacaoService service;
 	
